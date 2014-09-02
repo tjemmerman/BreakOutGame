@@ -24,8 +24,8 @@ void draw() {
   if(mouseX<=50) {
     paddle.x = 50;
   }
-  else if(mouseX>=550) {
-    paddle.x = 550;
+  else if(mouseX>=571) {
+    paddle.x = 571;
   }
   else {
     paddle.x = mouseX;
@@ -35,6 +35,21 @@ void draw() {
     for(int i = 0;i<10;i++){
     for(int q = 0;q<5;q++){
       rectMode(CENTER);
+            if (q == 0) {
+        fill(255,0,0);
+      }
+      else if (q == 1) {
+        fill(0,255,0);
+      }
+      else if(q == 2) {
+        fill(0,0,255);
+      }
+      else if(q == 3) {
+        fill(0);
+      }
+      else if(q == 4) {
+        fill(255,255,0);
+      }
       Rectangle tempRect = new Rectangle(rectangles2d[i][q]);
       rect(tempRect.x,tempRect.y,tempRect.width,tempRect.height);
   }
