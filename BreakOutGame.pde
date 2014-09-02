@@ -57,7 +57,7 @@ void draw() {
 
       Rectangle tempRect = new Rectangle(rectangles2d[i][q]);
       rect(tempRect.x,tempRect.y,tempRect.width,tempRect.height); 
-      if (ball.rectCircleIntersect(tempRect.x-30,tempRect.y-15,tempRect.width,tempRect.height)){
+      if (ball.rectCircleIntersect(tempRect.x,tempRect.y,tempRect.width,tempRect.height)){
         rectangles2d[i][q]=new Rectangle();
       }
         
