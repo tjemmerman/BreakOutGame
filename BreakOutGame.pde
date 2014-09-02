@@ -35,21 +35,24 @@ void draw() {
     for(int i = 0;i<10;i++){
     for(int q = 0;q<5;q++){
       rectMode(CENTER);
-            if (q == 0) {
-        fill(255,0,0);
+      switch(q) {
+        case 0:
+          fill(255,0,0);
+          break;
+        case 1:
+          fill(255,255,0);
+          break;
+        case 2:
+          fill(0,255,0);
+          break;
+        case 3:
+          fill(0,255,255);
+          break;
+        case 4:
+          fill(0,0,255);
+          break;
       }
-      else if (q == 1) {
-        fill(255,255,0);
-      }
-      else if(q == 2) {
-        fill(0,255,0);
-      }
-      else if(q == 3) {
-        fill(0,255,255);
-      }
-      else if(q == 4) {
-        fill(0,0,255);
-      }
+
       Rectangle tempRect = new Rectangle(rectangles2d[i][q]);
       rect(tempRect.x,tempRect.y,tempRect.width,tempRect.height);
   }
