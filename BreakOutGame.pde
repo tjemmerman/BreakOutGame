@@ -57,6 +57,10 @@ void draw() {
 
       Rectangle tempRect = new Rectangle(rectangles2d[i][q]);
       rect(tempRect.x,tempRect.y,tempRect.width,tempRect.height); 
+      if (ball.rectCircleIntersect(tempRect.x-30,tempRect.y-15,tempRect.width,tempRect.height)){
+        rectangles2d[i][q]=new Rectangle();
+      }
+        
   }
   }
 }
@@ -74,16 +78,16 @@ void mousePressed() {
 
 void keyPressed() {
  if(keyCode ==  UP) {
-   ball.y-=2;
+   ball.y-=5;
  }
  if(keyCode == DOWN) {
-   ball.y+=2;
+   ball.y+=5;
  }
  if(keyCode == LEFT) {
-   ball.x-=2;
+   ball.x-=5;
  }
  if(keyCode == RIGHT) {
-   ball.x+=2;
+   ball.x+=5;
  }
 }
 
