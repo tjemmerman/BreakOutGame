@@ -1,18 +1,18 @@
 Paddle paddle;
 import java.awt.*;
-Rectangle[][] rectangles2d = new Rectangle[5][10];
+Rectangle[][] rectangles2d = new Rectangle[10][5];
 int row=0;
 int column=0;
 
 
 void setup() {
-  size (611,800);
+  size (622,800);
   paddle = new Paddle();
   
-    for(int i = 0; i < 5; i++) {
-      for(int q = 0; q < 10; q++) {
+    for(int i = 0; i < 10; i++) {
+      for(int q = 0; q < 5; q++) {
        rectMode(CENTER);
-       rectangles2d[i][q] = new Rectangle(31+(61*q),16+(31*i),60,30);
+       rectangles2d[i][q] = new Rectangle(31+(62*i),16+(32*q),60,30);
       }
     }
   
@@ -32,8 +32,8 @@ void draw() {
   }
   paddle.display();
   
-    for(int i = 0;i<5;i++){
-    for(int q = 0;q<10;q++){
+    for(int i = 0;i<10;i++){
+    for(int q = 0;q<5;q++){
       rectMode(CENTER);
       Rectangle tempRect = new Rectangle(rectangles2d[i][q]);
       rect(tempRect.x,tempRect.y,tempRect.width,tempRect.height);
