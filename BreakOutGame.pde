@@ -60,7 +60,9 @@ void draw() {
       if (ball.rectCircleIntersect(tempRect.x,tempRect.y,tempRect.width,tempRect.height)){
         rectangles2d[i][q]=new Rectangle();
       }
-        
+       if (ball.rectCircleIntersect(paddle.x-50,height-30,100,20)) {
+          
+       }  
   }
   }
 }

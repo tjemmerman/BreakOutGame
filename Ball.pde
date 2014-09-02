@@ -6,8 +6,8 @@ class Ball {
    float av;
 
   Ball() {
-   int x = width/2;
-   int y = height/2;
+   x = width/2;
+   y = height/2;
   }
   
   void display() {
