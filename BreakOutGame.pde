@@ -60,7 +60,7 @@ void mousePressed() {
   rectangles2d[row][column].x = -1000;
   rectangles2d[row][column].y = -1000;
   row++;
-  if(row >= 5)
+  if(row >= 10)
   {
     row = 0;
     column++;
