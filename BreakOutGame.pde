@@ -3,12 +3,13 @@ import java.awt.*;
 Rectangle[][] rectangles2d = new Rectangle[10][5];
 int row=0;
 int column=0;
+Ball ball;
 
 
 void setup() {
   size (622,800);
   paddle = new Paddle();
-  
+  ball = new Ball();
     for(int i = 0; i < 10; i++) {
       for(int q = 0; q < 5; q++) {
        rectMode(CENTER);
@@ -21,6 +22,7 @@ void setup() {
 
 void draw() {
   background(255);
+  ball.display();
   if(mouseX<=50) {
     paddle.x = 50;
   }
@@ -54,19 +56,34 @@ void draw() {
       }
 
       Rectangle tempRect = new Rectangle(rectangles2d[i][q]);
-      rect(tempRect.x,tempRect.y,tempRect.width,tempRect.height);
+      rect(tempRect.x,tempRect.y,tempRect.width,tempRect.height); 
   }
   }
 }
 
 void mousePressed() {
-  rectangles2d[row][column].x = -1000;
-  rectangles2d[row][column].y = -1000;
-  row++;
-  if(row >= 10)
+  rectangles2d[column][row].x = -1000;
+  rectangles2d[column][row].y = -1000;
+  column++;
+  if(column >= 10)
   {
-    row = 0;
-    column++;
+    column = 0;
+    row++;
   }
+}
+
+void keyPressed() {
+ if(keyCode ==  UP) {
+   ball.y-=2;
+ }
+ if(keyCode == DOWN) {
+   ball.y+=2;
+ }
+ if(keyCode == LEFT) {
+   ball.x-=2;
+ }
+ if(keyCode == RIGHT) {
+   ball.x+=2;
+ }
 }
 
