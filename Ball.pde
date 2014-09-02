@@ -16,8 +16,8 @@ class Ball {
   } 
     
   boolean rectCircleIntersect(float rx, float ry, float rw, float rh) {
-  float circleDistanceX = abs(x - rx - rw/2);
-  float circleDistanceY = abs(y - ry - rh/2);
+  float circleDistanceX = abs(x - rx);
+  float circleDistanceY = abs(y - ry);
    
   if (circleDistanceX > (rw/2 + 5)) { return false; }
   if (circleDistanceY > (rh/2 + 5)) { return false; }
