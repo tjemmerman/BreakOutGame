@@ -4,10 +4,11 @@ Rectangle[][] rectangles2d = new Rectangle[10][5];
 int row=0;
 int column=0;
 Ball ball;
+boolean stuffs = false;
 
 
 void setup() {
-  size (622,800);
+  size (622,725);
   paddle = new Paddle();
   ball = new Ball();
     for(int i = 0; i < 10; i++) {
@@ -33,37 +34,43 @@ void draw() {
     paddle.x = mouseX;
   }
   paddle.display();
-  
-    for(int i = 0;i<10;i++){
+
+  for(int i = 0;i<10;i++){
     for(int q = 0;q<5;q++){
       rectMode(CENTER);
       switch(q) {
         case 0:
-          fill(255,0,0);
-          break;
+        fill(255,0,0);
+        break;
         case 1:
-          fill(255,255,0);
-          break;
+        fill(255,255,0);
+        break;
         case 2:
-          fill(0,255,0);
-          break;
+        fill(0,255,0);
+        break;
         case 3:
-          fill(0,255,255);
-          break;
+        fill(0,255,255);
+        break;
         case 4:
-          fill(0,0,255);
-          break;
+        fill(0,0,255);
+        break;
       }
 
       Rectangle tempRect = new Rectangle(rectangles2d[i][q]);
       rect(tempRect.x,tempRect.y,tempRect.width,tempRect.height); 
       if (ball.rectCircleIntersect(tempRect.x,tempRect.y,tempRect.width,tempRect.height)){
-        rectangles2d[i][q]=new Rectangle();
+        rectangles2d[i][q].y-=1000;
       }
-       if (ball.rectCircleIntersect(paddle.x-50,height-30,100,20)) {
-          
-       }  
-  }
+    }
+    
+    if (ball.rectCircleIntersect(paddle.x,height-20,100,20)) {
+//      ball.xv=ball.xv*-1;
+      ball.xv=0;
+      ball.yv=ball.yv*(-1);
+      println(ball.yv);
+      println("potatoes");
+      paddle.display();
+    }  
   }
 }
 
