@@ -7,6 +7,7 @@ class Ball {
   float yv;
   float ipx;
   float ipy;
+  boolean vertical;
    
   Ball() {
    x = width/2;
@@ -42,6 +43,7 @@ class Ball {
         ipx = x;
         ipy = y+5;
       }
+      vertical = true;
       return true; 
     } 
     if (circleDistanceY <= rh/2) {
@@ -53,6 +55,7 @@ class Ball {
         ipx = x+5;
         ipy = y;
       }
+      vertical = false;
       return true; 
     }
     else {
