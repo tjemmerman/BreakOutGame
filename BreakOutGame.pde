@@ -10,6 +10,7 @@ int tempMouseX;
 int tempMouseY;
 Player player;
 boolean launched;
+int destroyedBricks;
 
 void setup() {
   size (622,725);
@@ -31,6 +32,17 @@ void setup() {
 void draw() {
   background(255);
   ball.display();
+  if (destroyedBricks>=50) {
+    exit();
+  }
+  if (ball.y >= 725) {
+    player.lives -= 1;
+    ball.x = width/2;
+    ball.y = height/2; 
+  }
+  if (player.lives<=0) {
+    exit();
+  }
   if (launched) {
   if(mouseX<=50) {
     paddle.x = 50;
@@ -74,7 +86,8 @@ void draw() {
         else {
           ball.xv = ball.xv*-1;
         }
-        rectangles2d[i][j].y = -1000; 
+        rectangles2d[i][j].y = -1000;
+        destroyedBricks += 1; 
       } 
     }
   }  
