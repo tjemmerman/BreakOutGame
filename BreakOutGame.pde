@@ -61,15 +61,14 @@ void draw() {
       rect(rectangles2d[i][j].x,rectangles2d[i][j].y,rectangles2d[i][j].width,rectangles2d[i][j].height); 
         
     if (ball.rectCircleIntersect(rectangles2d[i][j].x,rectangles2d[i][j].y,rectangles2d[i][j].width,rectangles2d[i][j].height)){
-      println(ball.ipy);
-      println(rectangles2d[i][j].y);
+
      if (ball.ipy>=rectangles2d[i][j].y+rectangles2d[i][j].height/2 && ball.yv <= 0) {
         ball.yv = ball.yv*-1;
-        println("ducks");
+
       }
      else if (ball.ipy<=rectangles2d[i][j].y-rectangles2d[i][j].height/2 && ball.yv >= 0) {
         ball.yv = ball.yv*-1;
-        println("and chickens");
+
       }
       else if (ball.ipx>=rectangles2d[i][j].x-rectangles2d[i][j].width/2 && ball.xv >= 0) {
         ball.xv = ball.xv*-1;
@@ -87,11 +86,8 @@ void draw() {
     if (ball.rectCircleIntersect(paddle.x,height-20,100,20)) {
       if (ball.ipy >= height-30 && ball.yv>=0) {
         float pointOfContact = ball.ipx-(paddle.x-50);
-        println(pointOfContact);
         float xvModifier = -1+((pointOfContact/25)*.5);
-        println(xvModifier);
         ball.xv=(ball.xv*-1)+ball.yv*xvModifier;
-        println(ball.xv);
         ball.yv=abs(ball.yv)*-1;
       }
     }
