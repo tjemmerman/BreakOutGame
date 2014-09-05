@@ -11,9 +11,9 @@ void setup() {
   paddle = new Paddle();
   ball = new Ball();
     for(int i = 0; i < 10; i++) {
-      for(int q = 0; q < 5; q++) {
+      for(int j = 0; j < 5; j++) {
        rectMode(CENTER);
-       rectangles2d[i][q] = new Rectangle(31+(62*i),16+(32*q),60,30);
+       rectangles2d[i][j] = new Rectangle(31+(62*i),16+(32*j),60,30);
       }
     }
   
@@ -33,11 +33,11 @@ void draw() {
     paddle.x = mouseX;
   }
   paddle.display();
-
+   
   for(int i = 0;i<10;i++){
-    for(int q = 0;q<5;q++){
+    for(int j = 0;j<5;j++){
       rectMode(CENTER);
-      switch(q) {
+      switch(j) {
         case 0:
         fill(255,0,0);
         break;
@@ -54,14 +54,34 @@ void draw() {
         fill(0,0,255);
         break;
       }
-
-      Rectangle tempRect = new Rectangle(rectangles2d[i][q]);
+      
+      Rectangle tempRect = new Rectangle(rectangles2d[i][j]);
       rect(tempRect.x,tempRect.y,tempRect.width,tempRect.height); 
-      if (ball.rectCircleIntersect(tempRect.x,tempRect.y,tempRect.width,tempRect.height)){
-        rectangles2d[i][q].y-=1000;
+        
+    if (ball.rectCircleIntersect(tempRect.x,tempRect.y,tempRect.width,tempRect.height)){
+      println(ball.ipy);
+      println(rectangles2d[i][j].y);
+     if (ball.ipy<=rectangles2d[i][j].y+tempRect.height/2 && ball.yv <= 0) {
+        ball.yv = ball.yv*-1;
+        println("ducks");
       }
-    }
-    
+     else if (ball.ipy>=rectangles2d[i][j].y-tempRect.height/2 && ball.yv >= 0) {
+        ball.yv = ball.yv*-1;
+        println("and chickens");
+      }
+      else if (ball.ipx>=rectangles2d[i][j].x-tempRect.width/2 && ball.xv >= 0) {
+        ball.xv = ball.xv*-1;
+        
+      }
+      else if (ball.ipx<=rectangles2d[i][j].x+tempRect.width/2 && ball.xv <= 0) {
+        ball.xv = ball.xv*-1;
+        
+      }
+        rectangles2d[i][j].y-=1000;
+        
+    } 
+   } 
+  }    
     if (ball.rectCircleIntersect(paddle.x,height-20,100,20)) {
       if (ball.ipy <= height-30 && ball.yv>=0) {
         float pointOfContact = ball.ipx-(paddle.x-50);
@@ -71,10 +91,18 @@ void draw() {
         ball.xv=(ball.xv*-1)+ball.yv*xvModifier;
         println(ball.xv);
         ball.yv=abs(ball.yv)*-1;
-        
       }
-    }  
-  }
+    }
+    if (ball.x<=5) {
+      ball.xv = ball.xv*-1;
+    }
+    if (ball.x>=617) {
+      ball.xv = ball.xv*-1;
+    }
+    if (ball.y<=5) {
+      ball.yv = ball.yv*-1;
+    }
+   
 }
 
 void mousePressed() {
