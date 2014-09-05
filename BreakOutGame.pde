@@ -25,6 +25,7 @@ void setup() {
     launched = false;
     ball.y = height-35;
     noLoop();
+ 
 }
 
 void draw() {
@@ -42,7 +43,7 @@ void draw() {
   }
 }
   paddle.display();
-   
+  
   for(int i = 0;i<10;i++){
     for(int j = 0;j<5;j++){
       rectMode(CENTER);
@@ -65,59 +66,42 @@ void draw() {
       }
       
       rect(rectangles2d[i][j].x,rectangles2d[i][j].y,rectangles2d[i][j].width,rectangles2d[i][j].height); 
-        
-    if (ball.rectCircleIntersect(rectangles2d[i][j].x,rectangles2d[i][j].y,rectangles2d[i][j].width,rectangles2d[i][j].height)){
-
-     if (ball.ipy>=rectangles2d[i][j].y+rectangles2d[i][j].height/2 && ball.yv <= 0) {
-        ball.yv = ball.yv*-1;
-
-      }
-     else if (ball.ipy<=rectangles2d[i][j].y-rectangles2d[i][j].height/2 && ball.yv >= 0) {
-        ball.yv = ball.yv*-1;
-
-      }
-      else if (ball.ipx>=rectangles2d[i][j].x-rectangles2d[i][j].width/2 && ball.xv >= 0) {
-        ball.xv = ball.xv*-1;
-        
-      }
-      else if (ball.ipx<=rectangles2d[i][j].x+rectangles2d[i][j].width/2 && ball.xv <= 0) {
-        ball.xv = ball.xv*-1;
-        
-      }
-        rectangles2d[i][j].y-=1000;
-        
-    } 
-   } 
-  }    
-    if (ball.rectCircleIntersect(paddle.x,height-20,100,20)) {
-      if (ball.ipy >= height-30 && ball.yv>=0) {
-        float pointOfContact = ball.ipx-(paddle.x-50);
-        float xvModifier = -1+((pointOfContact/25)*.5);
-        ball.xv=(ball.xv*-1)+ball.yv*xvModifier;
-        ball.yv=abs(ball.yv)*-1;
-      }
+      
+      if (ball.rectCircleIntersect(rectangles2d[i][j].x,rectangles2d[i][j].y,rectangles2d[i][j].width,rectangles2d[i][j].height)){
+        if (ball.vertical) {
+          ball.yv = ball.yv*-1;
+        }
+        else {
+          ball.xv = ball.xv*-1;
+        }
+        rectangles2d[i][j].y = -1000; 
+      } 
     }
-    if (ball.x<=5) {
-      ball.xv = ball.xv*-1;
+  }  
+  if (ball.rectCircleIntersect(paddle.x,height-20,100,20)) {
+    if (ball.ipy >= height-30 && ball.yv>=0) {
+      float pointOfContact = ball.ipx-(paddle.x-50);
+      println(pointOfContact);
+      float xvModifier = -1+((pointOfContact/25)*.5);
+      println(xvModifier);
+      ball.xv=(ball.xv*-1)+ball.yv*xvModifier;
+      println(ball.xv);
+      ball.yv=abs(ball.yv)*-1;
     }
-    if (ball.x>=617) {
-      ball.xv = ball.xv*-1;
-    }
-    if (ball.y<=5) {
-      ball.yv = ball.yv*-1;
-    }
-   
+  }
+  if (ball.x<=5) {
+    ball.xv = ball.xv*-1;
+  }
+  if (ball.x>=617) {
+    ball.xv = ball.xv*-1;
+  }
+  if (ball.y<=5) {
+    ball.yv = ball.yv*-1;
+  }
+  
 }
 
 void mousePressed() {
-//  rectangles2d[column][row].x = -1000;
-//  rectangles2d[column][row].y = -1000;
-//  column++;
-//  if(column >= 10)
-//  {
-//    column = 0;
-//    row++;
-//  }
   ball.x=width/2;
   ball.y=height/2;
 }
