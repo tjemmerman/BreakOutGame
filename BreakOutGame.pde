@@ -64,12 +64,16 @@ void draw() {
     }
     
     if (ball.rectCircleIntersect(paddle.x,height-20,100,20)) {
-//      ball.xv=ball.xv*-1;
-      ball.xv=0;
-      ball.yv=ball.yv*(-1);
-      println(ball.yv);
-      println("potatoes");
-      paddle.display();
+      if (ball.ipy <= height-30 && ball.yv>=0) {
+        float pointOfContact = ball.ipx-(paddle.x-50);
+        println(pointOfContact);
+        float xvModifier = -1+((pointOfContact/25)*.5);
+        println(xvModifier);
+        ball.xv=(ball.xv*-1)+ball.yv*xvModifier;
+        println(ball.xv);
+        ball.yv=abs(ball.yv)*-1;
+        
+      }
     }  
   }
 }

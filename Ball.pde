@@ -1,23 +1,25 @@
 
 
 class Ball {
-  int x;
-  int y;
-  int xv;
-  int yv;
-  Point intersectPoint;
+  float x;
+  float y;
+  float xv;
+  float yv;
+  float ipx;
+  float ipy;
    
   Ball() {
    x = width/2;
    y = height/2;
    xv = 0;
-   yv = 1;
+   yv = 2;
   }
   
   void display() {
     x+=xv;
     y+=yv;
     fill(255,0,255);
+    noStroke();
     ellipse(x,y,10,10);
   } 
     
@@ -33,21 +35,23 @@ class Ball {
     }
     if (circleDistanceX <= rw/2) {
       if (y > ry) {
-        intersectPoint = new Point(x,y-5);
-        println(intersectPoint);
+        ipx = x;
+        ipy = y-5;
       }
       else if (y < ry) {
-        intersectPoint = new Point(x,y+5);
+        ipx = x;
+        ipy = y+5;
       }
       return true; 
     } 
     if (circleDistanceY <= rh/2) {
       if (x > rx) {
-        intersectPoint = new Point(x-5,y);
-        println(intersectPoint);
+        ipx = x-5;
+        ipy = y;
       }
       else if (x < rx) {
-        intersectPoint = new Point(x+5,y);
+        ipx = x+5;
+        ipy = y;
       }
       return true; 
     }
@@ -56,16 +60,20 @@ class Ball {
       int cornerDistanceX = int(circleDistanceX - rw/2);
       int cornerDistanceY = int(circleDistanceY - rh/2);
       if (x < rx && y < ry) {
-        intersectPoint = new Point(x+cornerDistanceX,y+cornerDistanceY);
+        ipx = x+cornerDistanceX;
+        ipy = y+cornerDistanceY;
       }
       if (x < rx && y > ry) {
-        intersectPoint = new Point(x+cornerDistanceX,y-cornerDistanceY);
+        ipx = x+cornerDistanceX;
+        ipy = y-cornerDistanceY;
       }
       if (x > rx && y > ry) {
-        intersectPoint = new Point(x-cornerDistanceX,y-cornerDistanceY);
+        ipx = x-cornerDistanceX;
+        ipy = y-cornerDistanceY;
       }
       if (x > rx && y < ry) {
-        intersectPoint = new Point(x-cornerDistanceX,y+cornerDistanceY);
+        ipx = x-cornerDistanceX;
+        ipy = y+cornerDistanceY;
       }
       return cornerDistance <= pow(5, 2);
     }
