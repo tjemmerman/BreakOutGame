@@ -8,24 +8,29 @@ boolean stuffs = false;
 boolean paused;
 int tempMouseX;
 int tempMouseY;
+Player player;
+boolean launched;
 
 void setup() {
   size (622,725);
   paddle = new Paddle();
   ball = new Ball();
+  player = new Player();
     for(int i = 0; i < 10; i++) {
       for(int j = 0; j < 5; j++) {
        rectMode(CENTER);
        rectangles2d[i][j] = new Rectangle(31+(62*i),16+(32*j),60,30);
       }
     }
-  
-  
+    launched = false;
+    ball.y = height-35;
+    noLoop();
 }
 
 void draw() {
   background(255);
   ball.display();
+  if (launched) {
   if(mouseX<=50) {
     paddle.x = 50;
   }
@@ -35,6 +40,7 @@ void draw() {
   else {
     paddle.x = mouseX;
   }
+}
   paddle.display();
    
   for(int i = 0;i<10;i++){
@@ -142,6 +148,11 @@ void keyPressed() {
      tempMouseY = mouseY;
      noLoop();
    }
+ }
+ if (key == ' ') {
+  ball.yv = -2;
+  launched = true;
+ loop(); 
  }
 }
 

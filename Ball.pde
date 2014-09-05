@@ -12,7 +12,8 @@ class Ball {
    x = width/2;
    y = height/2;
    xv = 0;
-   yv = 2;
+   yv = 0;
+   
   }
   
   void display() {
