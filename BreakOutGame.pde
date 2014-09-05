@@ -6,7 +6,6 @@ int column=0;
 Ball ball;
 boolean stuffs = false;
 
-
 void setup() {
   size (622,725);
   paddle = new Paddle();
