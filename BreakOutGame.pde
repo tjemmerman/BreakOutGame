@@ -55,25 +55,24 @@ void draw() {
         break;
       }
       
-      Rectangle tempRect = new Rectangle(rectangles2d[i][j]);
-      rect(tempRect.x,tempRect.y,tempRect.width,tempRect.height); 
+      rect(rectangles2d[i][j].x,rectangles2d[i][j].y,rectangles2d[i][j].width,rectangles2d[i][j].height); 
         
-    if (ball.rectCircleIntersect(tempRect.x,tempRect.y,tempRect.width,tempRect.height)){
+    if (ball.rectCircleIntersect(rectangles2d[i][j].x,rectangles2d[i][j].y,rectangles2d[i][j].width,rectangles2d[i][j].height)){
       println(ball.ipy);
       println(rectangles2d[i][j].y);
-     if (ball.ipy<=rectangles2d[i][j].y+tempRect.height/2 && ball.yv <= 0) {
+     if (ball.ipy>=rectangles2d[i][j].y+rectangles2d[i][j].height/2 && ball.yv <= 0) {
         ball.yv = ball.yv*-1;
         println("ducks");
       }
-     else if (ball.ipy>=rectangles2d[i][j].y-tempRect.height/2 && ball.yv >= 0) {
+     else if (ball.ipy<=rectangles2d[i][j].y-rectangles2d[i][j].height/2 && ball.yv >= 0) {
         ball.yv = ball.yv*-1;
         println("and chickens");
       }
-      else if (ball.ipx>=rectangles2d[i][j].x-tempRect.width/2 && ball.xv >= 0) {
+      else if (ball.ipx>=rectangles2d[i][j].x-rectangles2d[i][j].width/2 && ball.xv >= 0) {
         ball.xv = ball.xv*-1;
         
       }
-      else if (ball.ipx<=rectangles2d[i][j].x+tempRect.width/2 && ball.xv <= 0) {
+      else if (ball.ipx<=rectangles2d[i][j].x+rectangles2d[i][j].width/2 && ball.xv <= 0) {
         ball.xv = ball.xv*-1;
         
       }
@@ -83,7 +82,7 @@ void draw() {
    } 
   }    
     if (ball.rectCircleIntersect(paddle.x,height-20,100,20)) {
-      if (ball.ipy <= height-30 && ball.yv>=0) {
+      if (ball.ipy >= height-30 && ball.yv>=0) {
         float pointOfContact = ball.ipx-(paddle.x-50);
         println(pointOfContact);
         float xvModifier = -1+((pointOfContact/25)*.5);
@@ -106,14 +105,16 @@ void draw() {
 }
 
 void mousePressed() {
-  rectangles2d[column][row].x = -1000;
-  rectangles2d[column][row].y = -1000;
-  column++;
-  if(column >= 10)
-  {
-    column = 0;
-    row++;
-  }
+//  rectangles2d[column][row].x = -1000;
+//  rectangles2d[column][row].y = -1000;
+//  column++;
+//  if(column >= 10)
+//  {
+//    column = 0;
+//    row++;
+//  }
+  ball.x=width/2;
+  ball.y=height/2;
 }
 
 void keyPressed() {
