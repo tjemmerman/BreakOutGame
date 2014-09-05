@@ -5,6 +5,9 @@ int row=0;
 int column=0;
 Ball ball;
 boolean stuffs = false;
+boolean paused;
+int tempMouseX;
+int tempMouseY;
 
 void setup() {
   size (622,725);
@@ -129,6 +132,20 @@ void keyPressed() {
  }
  if(keyCode == RIGHT) {
    ball.x+=5;
+ }
+ if(key == 'p') {
+   if(paused) {
+     paused = !paused;
+     loop();
+     mouseX = tempMouseX;
+     mouseY = tempMouseY;
+   }
+   else {
+     paused = !paused;
+     tempMouseX = mouseX;
+     tempMouseY = mouseY;
+     noLoop();
+   }
  }
 }
 
