@@ -1,3 +1,6 @@
+
+// PRESS 'SPACEBAR' FOR THE BALL TO START MOVEING
+
 Paddle paddle;
 import java.awt.*;
 Rectangle[][] rectangles2d = new Rectangle[10][5];
@@ -11,12 +14,20 @@ int tempMouseY;
 Player player;
 boolean launched;
 int destroyedBricks;
+int time;
+int wait = 5000;
+int gameOver = 0;
+color gameOverButtonColor;
+PFont sentenceFont;
 
 void setup() {
   size (622,725);
+  time = millis();
   paddle = new Paddle();
   ball = new Ball();
   player = new Player();
+  gameOverButtonColor = color(0,0,255,200);
+  sentenceFont = createFont("Helvetica", 30, true);
     for(int i = 0; i < 10; i++) {
       for(int j = 0; j < 5; j++) {
        rectMode(CENTER);
@@ -33,15 +44,35 @@ void draw() {
   background(255);
   ball.display();
   if (destroyedBricks>=50) {
-    exit();
+    text(" You Won! Congradulations! ",width/2,600);
+    ball.xv = 0;
+    ball.yv = 0;
+    gameOver = 1;
+    textFont(sentenceFont,16);
+    fill(gameOverButtonColor);
+    rect(500,250,100,60);
+    fill(0);
+    textFont(sentenceFont,20);
+    text("Exit",480,250);
   }
   if (ball.y >= 725) {
     player.lives -= 1;
     ball.x = width/2;
     ball.y = height/2; 
+    ball.xv = 0;
+    ball.yv = 2;
   }
   if (player.lives<=0) {
-    exit();
+    text(" You lost. ",width/2,600);
+    ball.xv = 0;
+    ball.yv = 0;
+    gameOver = 1;
+    textFont(sentenceFont,16);
+    fill(gameOverButtonColor);
+    rect(500,250,100,60);
+    fill(0);
+    textFont(sentenceFont,20);
+    text("Exit",480,250);
   }
   if (launched) {
   if(mouseX<=50) {
@@ -94,11 +125,8 @@ void draw() {
   if (ball.rectCircleIntersect(paddle.x,height-20,100,20)) {
     if (ball.ipy >= height-30 && ball.yv>=0) {
       float pointOfContact = ball.ipx-(paddle.x-50);
-      println(pointOfContact);
       float xvModifier = -1+((pointOfContact/25)*.5);
-      println(xvModifier);
       ball.xv=(ball.xv*-1)+ball.yv*xvModifier;
-      println(ball.xv);
       ball.yv=abs(ball.yv)*-1;
     }
   }
@@ -114,24 +142,20 @@ void draw() {
   
 }
 
-void mousePressed() {
-  ball.x=width/2;
-  ball.y=height/2;
+void mouseClicked() {
+  if (gameOver == 1) {
+    if ((450<mouseX && mouseX<550) && (220<mouseY && mouseY<280)) {
+      exit();
+    }
+  }
+  if (destroyedBricks>=50) {
+    if ((450<mouseX && mouseX<550) && (220<mouseY && mouseY<280)) {
+      exit();
+    }
+}
 }
 
 void keyPressed() {
- if(keyCode ==  UP) {
-   ball.y-=5;
- }
- if(keyCode == DOWN) {
-   ball.y+=5;
- }
- if(keyCode == LEFT) {
-   ball.x-=5;
- }
- if(keyCode == RIGHT) {
-   ball.x+=5;
- }
  if(key == 'p') {
    if(paused) {
      paused = !paused;
